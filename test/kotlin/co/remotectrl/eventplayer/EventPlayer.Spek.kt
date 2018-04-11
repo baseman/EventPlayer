@@ -36,7 +36,7 @@ class EventPlayerTest : Spek({
         val id = AggregateId<StubModel>(Value = idVal)
         val model = StubModel(id = id, changeVal = false)
 
-//        on("Command") {
+        on("Command") {
 
             val cmd = StubChangeCommand(b = true)
 
@@ -52,9 +52,9 @@ class EventPlayerTest : Spek({
             it("should try to validate command input on execution") {
                 { val blah = StubChangeCommand(b = false).executeOn(model) } shouldThrow AnyException
             }
-//        }
-//
-//        on("Event") {
+        }
+
+        on("Event") {
 
             val evt = StubChangedEvent(id = id, version = 1, b = true)
 
@@ -65,9 +65,9 @@ class EventPlayerTest : Spek({
                 model.changeVal shouldEqual evt.b
                 model.latestVersion shouldEqual evt.version
             }
-//        }
+        }
 
-//        on("Player") {
+        on("Player") {
 
             val player = Player<StubModel>()
 
@@ -83,6 +83,6 @@ class EventPlayerTest : Spek({
 
                 model.sum shouldEqual 2 + 1
             }
-//        }
+        }
     }
 })
