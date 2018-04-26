@@ -4,9 +4,6 @@ import org.amshove.kluent.shouldThrow
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
-import org.junit.platform.runner.JUnitPlatform
-import org.junit.runner.RunWith
 
 data class StubModel(override val id: AggregateId<StubModel>, var changeVal: Boolean, var sum: Int = 0) : Aggregate<StubModel>()
 
@@ -28,7 +25,6 @@ data class StubChangedEvent(override val id: AggregateId<StubModel>, override va
     }
 }
 
-@RunWith(JUnitPlatform::class)
 class EventPlayerTest : Spek({
 
     describe("EventPlayer Aggregate") {
