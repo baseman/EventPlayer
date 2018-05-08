@@ -1,2 +1,2 @@
 # eventPlayer
-Play With Aggregate Events in kotlin
+Play With Aggregate Events
