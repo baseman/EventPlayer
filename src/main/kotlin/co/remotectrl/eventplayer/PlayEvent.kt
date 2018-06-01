@@ -13,4 +13,4 @@ abstract class PlayEvent<TModel : Aggregate<TModel>> {
     }
 }
 
-class EventId<TModel>(val Value: Int) where TModel : Aggregate<TModel>
+class EventId<TModel>(val value: Int) where TModel : Aggregate<TModel>
