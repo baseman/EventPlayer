@@ -16,11 +16,9 @@ apply plugin: 'kotlin-platform-common'
 
 repositories {
     mavenCentral()
-    maven { url "http://repo.spring.io/plugins-release/" }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    testCompile "org.amshove.kluent:kluent:1.24"
 }
