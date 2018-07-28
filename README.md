@@ -1,2 +1,2 @@
-# eventPlayer
+# eventplayer
 play with aggregate events
