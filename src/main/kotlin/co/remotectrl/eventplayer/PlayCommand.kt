@@ -8,6 +8,6 @@ abstract class PlayCommand<TModel : Aggregate<TModel>> {
 
     fun executeOn(model: TModel): PlayEvent<TModel> {
         validate(model)
-        return getEvent(model.id, model.latestVersion + 1)
+        return getEvent(model.legend.aggregateId, model.legend.latestVersion + 1)
     }
 }
