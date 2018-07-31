@@ -1,8 +1,10 @@
 package co.remotectrl.eventplayer
 
-abstract class PlayEvent<TModel : Aggregate<TModel>>(val legend: EventLegend<TModel>){
+interface PlayEvent<TModel : Aggregate<TModel>> {
 
-    protected abstract fun applyChangesTo(latestVersion: Int): TModel
+    val legend: EventLegend<TModel>
+
+    fun applyChangesTo(latestVersion: Int): TModel
 
     fun applyTo(mutable: MutableAggregate<TModel>) {
         mutable.model = applyChangesTo(legend.version)

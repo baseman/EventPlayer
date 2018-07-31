@@ -1,10 +1,10 @@
 package co.remotectrl.eventplayer
 
-abstract class PlayCommand<TModel : Aggregate<TModel>> {
+interface PlayCommand<TModel : Aggregate<TModel>> {
 
-    abstract fun getEvent(aggregateId: AggregateId<TModel>, version: Int): PlayEvent<TModel>
+    fun getEvent(aggregateId: AggregateId<TModel>, version: Int): PlayEvent<TModel>
 
-    abstract fun validate(model: TModel)
+    fun validate(model: TModel)
 
     fun executeOn(model: TModel): PlayEvent<TModel> {
         validate(model)
