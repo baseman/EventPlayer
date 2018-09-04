@@ -4,10 +4,10 @@ interface PlayEvent<TModel : Aggregate<TModel>> {
 
     val legend: EventLegend<TModel>
 
-    fun applyChangesTo(latestVersion: Int): TModel
+    fun applyChangesTo(model: TModel, latestVersion: Int): TModel
 
     fun applyTo(mutable: MutableAggregate<TModel>) {
-        mutable.model = applyChangesTo(legend.version)
+        mutable.model = applyChangesTo(mutable.model, legend.version)
     }
 }
 
