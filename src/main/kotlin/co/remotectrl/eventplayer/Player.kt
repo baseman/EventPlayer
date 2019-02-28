@@ -1,9 +1,9 @@
 package co.remotectrl.eventplayer
 
-class Player<TModel: Aggregate<TModel>> {
-    fun playFor(evts: Array<PlayEvent<TModel>>, model: TModel) {
+class Player<TAggregate: Aggregate<TAggregate>> {
+    fun playFor(evts: Array<PlayEvent<TAggregate>>, aggregate: TAggregate) {
         for(evt in evts){
-            evt.applyTo(MutableAggregate(model))
+            evt.applyTo(MutableAggregate(aggregate = aggregate))
         }
     }
 

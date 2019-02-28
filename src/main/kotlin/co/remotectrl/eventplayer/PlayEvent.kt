@@ -1,23 +1,23 @@
 package co.remotectrl.eventplayer
 
-interface PlayEvent<TModel : Aggregate<TModel>> {
+interface PlayEvent<TAggregate : Aggregate<TAggregate>> {
 
-    val legend: EventLegend<TModel>
+    val legend: EventLegend<TAggregate>
 
-    fun applyChangesTo(model: TModel, latestVersion: Int): TModel
+    fun applyChangesTo(aggregate: TAggregate, latestVersion: Int): TAggregate
 
-    fun applyTo(mutable: MutableAggregate<TModel>) {
-        mutable.model = applyChangesTo(mutable.model, legend.version)
+    fun applyTo(mutable: MutableAggregate<TAggregate>) {
+        mutable.aggregate = applyChangesTo(mutable.aggregate, legend.version)
     }
 }
 
-class MutableAggregate<TModel: Aggregate<TModel>>(var model: TModel)
+class MutableAggregate<TAggregate: Aggregate<TAggregate>>(var aggregate: TAggregate)
 
-class EventId<TModel>(val value: Int) where TModel : Aggregate<TModel>{
+class EventId<TAggregate>(val value: Int) where TAggregate : Aggregate<TAggregate>{
     constructor() : this(0)
 }
 
-class EventLegend<TModel: Aggregate<TModel>>(val eventId: EventId<TModel>, val aggregateId: AggregateId<TModel>, val version: Int){
+class EventLegend<TAggregate: Aggregate<TAggregate>>(val eventId: EventId<TAggregate>, val aggregateId: AggregateId<TAggregate>, val version: Int){
     constructor(evtIdVal: Int, aggregateIdVal: Int, version: Int) : this(EventId(evtIdVal), AggregateId(aggregateIdVal), version)
     constructor() : this(0, 0, 0)
 }

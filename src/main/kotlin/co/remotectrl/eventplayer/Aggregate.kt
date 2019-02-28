@@ -1,14 +1,14 @@
 package co.remotectrl.eventplayer
 
-interface Aggregate<TModel : Aggregate<TModel>> {
-    val legend: AggregateLegend<TModel>
+interface Aggregate<TAggregate : Aggregate<TAggregate>> {
+    val legend: AggregateLegend<TAggregate>
 }
 
-class AggregateId<TModel>(val value: Int) where TModel : Aggregate<TModel>{
-    constructor() : this(0)
+class AggregateId<TAggregate>(val value: Int) where TAggregate : Aggregate<TAggregate>{
+    constructor() : this(value = 0)
 }
 
-class AggregateLegend<TModel: Aggregate<TModel>>(val aggregateId: AggregateId<TModel>, val latestVersion: Int){
-    constructor(aggregateIdVal: Int, latestVersion: Int) : this(AggregateId(aggregateIdVal), latestVersion)
-    constructor() : this(0, 0)
+class AggregateLegend<TAggregate: Aggregate<TAggregate>>(val aggregateId: AggregateId<TAggregate>, val latestVersion: Int){
+    constructor(aggregateIdVal: Int, latestVersion: Int) : this(AggregateId(value = aggregateIdVal), latestVersion = latestVersion)
+    constructor() : this(aggregateIdVal = 0, latestVersion = 0)
 }
