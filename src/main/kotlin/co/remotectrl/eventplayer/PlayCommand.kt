@@ -2,7 +2,15 @@ package co.remotectrl.eventplayer
 
 interface PlayCommand<TAggregate : Aggregate<TAggregate>> {
 
-    fun getEvent(aggregateId: AggregateId<TAggregate>, version: Int): PlayEvent<TAggregate>
+    fun getEventLegend(aggregateId: AggregateId<TAggregate>, version: Int) : EventLegend<TAggregate>{
+        return EventLegend(
+                0.toString(),
+                aggregateId.value,
+                version
+        )
+    }
+
+    fun getEvent(eventLegend: EventLegend<TAggregate>): PlayEvent<TAggregate>
 
     fun validate(aggregate: TAggregate, validation: PlayValidation)
 
@@ -16,7 +24,9 @@ interface PlayCommand<TAggregate : Aggregate<TAggregate>> {
         return if (validatedItems.isNotEmpty()) PlayExecution.Invalidated(items = validatedItems)
         else {
             PlayExecution.Validated(
-                    event = getEvent(aggregateId = aggregate.legend.aggregateId, version = aggregate.legend.latestVersion + 1)
+                    event = getEvent(
+                            getEventLegend(aggregateId = aggregate.legend.aggregateId, version = aggregate.legend.latestVersion + 1)
+                    )
             )
         }
     }
